@@ -5,7 +5,7 @@
 ## 🧾 Título do Projeto
 **Sistema Inteligente de Gestão de Chamados de Suporte**
 
-## 🎯 Descrição do DesafioA
+## 🎯 Descrição do Desafio
 Desenvolver uma **plataforma integrada e automatizada** para gerenciamento de chamados de suporte técnico, que otimize processos, reduza custos e melhore a experiência do usuário.
 
 ## 📦 Backlog do Produto
