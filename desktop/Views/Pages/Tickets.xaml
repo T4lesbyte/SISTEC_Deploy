@@ -1,0 +1,195 @@
+﻿<UserControl x:Class="sistecDesktop.Views.Pages.Tickets"
+             x:Name="TicketsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:sistecDesktop.Views.Pages" 
+             xmlns:converters="clr-namespace:sistecDesktop.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--#region Converters-->
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:PriorityToTextConverter x:Key="PriorityToTextConverter"/>
+    </UserControl.Resources>
+    <!--#endregion-->
+    
+    <Grid>
+
+        <Border Grid.Row="1" Margin="10 10 10 10" Padding="10"
+            BorderBrush="{DynamicResource brush-frenchGray}"
+            BorderThickness="1"
+            CornerRadius="8"
+            HorizontalAlignment="Stretch"
+            Background="{DynamicResource brush-lavenderMist}">
+
+            <Grid>
+
+                <!--#region Definições do Grid-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion-->
+
+                <TextBlock Text="Chamados Recentes" FontSize="24" Margin="20" 
+                   FontWeight="Bold"
+                   VerticalAlignment="Center"
+                   FontFamily="{StaticResource MontserratBold}"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+
+                    <Button Content="Ver Escalados"
+                            Style="{StaticResource HomeButtons}"
+                            Foreground="{StaticResource brush-vibrantViolet}"
+                            Background="Transparent"
+                            Command="{Binding ViewModel.ViewScaledTicketsCommand, 
+                        ElementName=TicketsControl}"
+                            Visibility="{Binding CanOpenScaledTickets,
+Converter={StaticResource BoolToVisibilityConverter}}"
+                            FontSize="14" Width="120" Height="50"/>
+
+                    <Button Content="Atualizar"
+                            Style="{StaticResource HomeButtons}" 
+                            Foreground="{StaticResource brush-peachOrange}"
+                            Background="Transparent"
+                            FontSize="14" Width="100" Height="50"
+                            Command="{Binding ViewModel.LoadTicketsCommand, 
+                        ElementName=TicketsControl}"
+                            Margin="10"/>
+
+                </StackPanel>
+
+                <!--Bloco de pesquisa-->
+                <StackPanel Orientation="Horizontal" Grid.Row="1"
+            HorizontalAlignment="Left">
+
+                    <TextBlock Text="Pesquisar: " Margin="0"
+               FontFamily="{StaticResource MontserratRegular}"/>
+
+                    <TextBox Text="{Binding ViewModel.SearchTerm, ElementName=TicketsControl, UpdateSourceTrigger=PropertyChanged}"
+             Width="300" Margin="0"
+             VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <!--#region Mensagem de erro-->
+                <TextBlock Grid.Row="2" Margin="0,0,0,0" FontSize="12" 
+                   Text="{Binding ErrorMessage}"
+                   Foreground="Red"
+                   TextWrapping="Wrap"/>
+                <!--#endregion-->
+
+                <!-- DataGrid -->
+
+                <DataGrid Grid.Row="3" Grid.ColumnSpan="2" 
+                          RowHeight="50" 
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+            ItemsSource="{Binding ViewModel.Tickets, ElementName=TicketsControl}"
+                        SelectedItem="{Binding ViewModel.SelectedTicket, ElementName=TicketsControl}"              
+                        Style="{StaticResource MyDataGrid}">
+
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" 
+                            Binding="{Binding Id}" 
+                            Width="50"/>
+
+                        <DataGridTextColumn Header="Categoria" 
+                            Binding="{Binding Categoria}" 
+                            Width="120"/>
+
+                        <DataGridTextColumn Header="Usuário" 
+                            Binding="{Binding UsuarioAbertura}" 
+                            Width="150"/>
+
+                        <DataGridTextColumn Header="Título" 
+                            Binding="{Binding Title}" 
+                            Width="250"/>
+
+                        <DataGridTextColumn Header="Prioridade"
+                        Binding="{Binding Prioridade, 
+                            Converter={StaticResource PriorityToTextConverter}}" Width="100"/>
+
+                        <DataGridTextColumn Header="Status" 
+                            Binding="{Binding Status}" 
+                            Width="120"/>
+
+                        <DataGridTextColumn Header="Abertura" 
+                            Binding="{Binding CreatedAt, StringFormat='dd/MM/yyyy HH:mm'}" 
+                            Width="130"/>
+
+                        <DataGridTemplateColumn Header="Ações" Width="400">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <Button Style="{StaticResource ViewButton}"
+                                                Tag="/images/eye.png"
+                                            Command="{Binding ViewModel.ViewTicketCommand, 
+                                                      ElementName=TicketsControl}"
+                                            CommandParameter="{Binding}"
+                                            Visibility="{Binding CanView, 
+                            Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                                        <Button Content="Resolver"
+                                                Background="#22C55E"
+                                                Tag="/images/circle-check.png"
+                                                BorderBrush="{StaticResource brush-White}"
+                                                Style="{StaticResource TicketButtons}"
+                                                Command="{Binding ViewModel.ResolveTicketCommand, 
+                                                          ElementName=TicketsControl}"
+                                            CommandParameter="{Binding}"
+                                            Visibility="{Binding CanResolve, 
+                                        Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                                        <Button Content="Escalar"
+                                                Tag="/images/triangle-alert.png"
+                                                BorderBrush="{StaticResource brush-peachOrange}"
+                                                Foreground="{StaticResource brush-peachOrange}"
+                                                Style="{StaticResource TicketButtons}"
+                                            Command="{Binding ViewModel.ScaleTicketCommand, 
+                                                      ElementName=TicketsControl}"
+                                            CommandParameter="{Binding}"
+                                            Visibility="{Binding CanScale,
+                                        Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+                                        <Button Content="🤖 Ver Solução IA"
+                        Command="{Binding ViewModel.ViewIaSolutionCommand, ElementName=TicketsControl}"
+                        CommandParameter="{Binding}"
+                        Margin="5,0,0,0"
+                                                Background="Transparent"
+                                                BorderBrush="{StaticResource brush-vibrantViolet}"
+                                                Foreground="{StaticResource brush-vibrantViolet}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Aguardando Resposta">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
