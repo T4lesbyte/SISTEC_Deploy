@@ -14,13 +14,13 @@ Desenvolver uma **plataforma integrada e automatizada** para gerenciamento de ch
 ## 📋 Cronograma de sprints
 | Sprint   | Datas           | Documentação |
 |----------|-----------------|--------------|
-|📌 Sprint 1 | 19/08 à 25/08   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/1  |
-|📌 Sprint 2 | 26/08 à 08/09   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/2             |
-|📌 Sprint 3 | 09/09 à 15/09   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/3             |
-|📌 Sprint 4 | 16/09 à 23/09   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/4             |
-|📌 Sprint 5 | 24/09 à 30/09   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/5             |
-|📌 Sprint 6 | 01/10 à 07/10   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/6             |
-|📌 Sprint 7 | 08/10 à 14/10   | https://github.com/T4lesbyte/Projeto-de-sistemas-orientados-a-objetos/issues/7             |
+|📌 Sprint 1 | 15/09 à 21/09   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/2  |
+|📌 Sprint 2 | 22/09 à 28/09   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/5  |
+|📌 Sprint 3 | 29/09 à 05/10   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/8  |
+|📌 Sprint 4 | 06/10 à 12/10   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/11 |
+|📌 Sprint 5 | 13/10 à 19/10   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/14 |
+|📌 Sprint 6 | 20/10 à 26/10   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/17 |
+|📌 Sprint 7 | 27/10 à 02/11   | https://github.com/T4lesbyte/SISTEC_Deploy/issues/20 |
 
 ## Tecnologias utilizadas
 
